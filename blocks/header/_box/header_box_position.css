@@ -1,0 +1,17 @@
+.header_box_position {
+  margin: 45px auto 40px;
+}
+
+
+@media (max-width: 920px) {
+  .header_box_position {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 460px) {
+  .header_box_position {
+    margin: 28px 0 42px;
+  }
+}
