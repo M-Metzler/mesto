@@ -2,9 +2,12 @@ let popup = document.querySelector(".popup");
 let popupOpen = document.querySelector(".profile__button-edit");
 let popupClose = popup.querySelector(".popup__btn-close");
 let saveForm = popup.querySelector(".popup__btn-save");
+let root = document.querySelector(".root");
+
 
 function popupToggle() {
   popup.classList.toggle("popup_opened");
+  root.classList.toggle("root_no-scroll");
 }
 // --- закрытие popup вне формы
 function clickOverlay(event) {
