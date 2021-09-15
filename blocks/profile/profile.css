@@ -12,9 +12,3 @@
     flex-direction: column;
   }
 }
-
-@media (max-width: 460px) {
-  .profile {
-    max-width: 282px;
-  }
-}
