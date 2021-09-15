@@ -5,9 +5,9 @@
   transition: opacity 1s ease-in;
   background: url(../../../images/icon-close.svg) center no-repeat;
   border: none;
-  position: relative;
-  bottom: 8px;
-  left: 240px;
+  position: absolute;
+  top: -40px;
+  right: -40px;
 }
 
 .popup__btn-close:hover {
@@ -19,7 +19,7 @@
     width: 20px;
     height: 20px;
     background-size: 20px;
-    left: 130px;
-    bottom: 16px;
+    top: -35px;
+    right: 0px;
   }
 }
