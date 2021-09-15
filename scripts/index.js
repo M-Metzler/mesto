@@ -7,7 +7,6 @@ let saveForm = popup.querySelector(".popup__btn-save");
 
 function popupToggle() {
   popup.classList.toggle("popup_opened");
-  root.classList.toggle("root_no-scroll");
 }
 // --- закрытие popup вне формы
 function clickOverlay(event) {
