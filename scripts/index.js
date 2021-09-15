@@ -1,11 +1,11 @@
 let popup = document.querySelector(".popup");
 let popupOpen = document.querySelector(".profile__button-edit");
 let popupClose = popup.querySelector(".popup__btn-close");
-// Код добавления данных в профиль
+//объявление переменных popup
 let formElement = document.querySelector(".popup__container");
 let nameInput = formElement.querySelector(".popup__text_type_name");
 let jobInput = formElement.querySelector(".popup__text_type_about-self");
-// объявление данных из профиля
+// объявление переменных профиля
 let profJob = document.querySelector(".profile__about-self");
 let profName = document.querySelector(".profile__name");
 
