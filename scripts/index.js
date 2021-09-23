@@ -1,42 +1,59 @@
-let popup = document.querySelector(".popup");
-let popupOpen = document.querySelector(".profile__button-edit");
-let popupClose = popup.querySelector(".popup__btn-close");
-//объявление переменных popup
-let formElement = document.querySelector(".popup__container");
-let nameInput = formElement.querySelector(".popup__text_type_name");
-let jobInput = formElement.querySelector(".popup__text_type_about-self");
+const popupProfile = document.querySelector(".popup_type_profile");
+const popupCard = document.querySelector(".popup_type_card");
+// объявление переменных кнопок открытия/закрытия попапов
+const popupOpenProfile = document.querySelector(".profile__button-edit");
+const popupOpenCard = document.querySelector(".profile__button-add");
+const popupCloseProfile = popupProfile.querySelector(".popup__btn-close");
+const popupCloseCard = popupCard.querySelector(".popup__btn-close");
+// объявление переменных формы профиля
+const formProfile = document.querySelector(".popup__container_type_profile-form");
+const nameInput = formProfile.querySelector(".popup__text_type_name");
+const jobInput = formProfile.querySelector(".popup__text_type_about-self");
 // объявление переменных профиля
-let profJob = document.querySelector(".profile__about-self");
-let profName = document.querySelector(".profile__name");
+const profJob = document.querySelector(".profile__about-self");
+const profName = document.querySelector(".profile__name");
 
-function popupToggle() {
-  if (popup.classList.contains("popup_opened") === false) {
-    popup.classList.add("popup_opened");
+//Открытие/закрытие формы редактирования профиля
+function popupToggleProfle() {
+  if (!popupProfile.classList.contains("popup_opened")) {
     nameInput.value = profName.textContent;
     jobInput.value = profJob.textContent;
+    popupProfile.classList.add("popup_opened");
   } else {
-    popup.classList.remove("popup_opened");
+    popupProfile.classList.remove("popup_opened");
+  }
+}
+
+//Открытие/закрытие формы добавления карточки
+function popupToggleCard() {
+  if (!popupCard.classList.contains("popup_opened")) {
+    popupCard.classList.add("popup_opened");
+  } else {
+    popupCard.classList.remove("popup_opened");
   }
 }
 
 // --- закрытие popup вне формы
 function clickOverlay(event) {
   if (event.target === event.currentTarget) {
-    popupToggle();
+    popupToggleProfle();
   }
 }
 //
 
+//Событие отправки формы редактрования профиля
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
   profName.textContent = nameInput.value;
   profJob.textContent = jobInput.value;
-  popupToggle();
+  popupToggleProfle();
 }
 
-formElement.addEventListener("submit", formSubmitHandler);
+formProfile.addEventListener("submit", formSubmitHandler);
 
-popup.addEventListener("click", clickOverlay);
-popupOpen.addEventListener("click", popupToggle);
-popupClose.addEventListener("click", popupToggle);
+popupProfile.addEventListener("click", clickOverlay);
+popupOpenProfile.addEventListener("click", popupToggleProfle);
+popupOpenCard.addEventListener("click", popupToggleCard);
+popupCloseProfile.addEventListener("click", popupToggleProfle);
+popupCloseCard.addEventListener("click", popupToggleCard);
