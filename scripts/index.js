@@ -6,7 +6,9 @@ const popupOpenCard = document.querySelector(".profile__button-add");
 const popupCloseProfile = popupProfile.querySelector(".popup__btn-close");
 const popupCloseCard = popupCard.querySelector(".popup__btn-close");
 // объявление переменных формы профиля
-const formProfile = document.querySelector(".popup__container_type_profile-form");
+const formProfile = document.querySelector(
+  ".popup__container_type_profile-form"
+);
 const nameInput = formProfile.querySelector(".popup__text_type_name");
 const jobInput = formProfile.querySelector(".popup__text_type_about-self");
 // объявление переменных профиля
@@ -19,29 +21,29 @@ const cardTemplateItem = document.querySelector(".card-template");
 
 const initialCards = [
   {
-    name: 'Волгоград',
-    link: './images/volgograd.png'
+    name: "Волгоград",
+    link: "./images/volgograd.png",
   },
   {
-    name: 'Краснодар',
-    link: './images/krasnodar.png'
+    name: "Краснодар",
+    link: "./images/krasnodar.png",
   },
   {
-    name: 'Тюмень',
-    link: './images/tumeni.png'
+    name: "Тюмень",
+    link: "./images/tumeni.png",
   },
   {
-    name: 'Хабаровск',
-    link: './images/habarovsk.png'
+    name: "Хабаровск",
+    link: "./images/habarovsk.png",
   },
   {
-    name: 'Пермь',
-    link: './images/permi.png'
+    name: "Пермь",
+    link: "./images/permi.png",
   },
   {
-    name: 'Санкт-Петербург',
-    link: './images/piter.png'
-  }
+    name: "Санкт-Петербург",
+    link: "./images/piter.png",
+  },
 ];
 
 initialCards.reverse();
@@ -52,9 +54,13 @@ function renderCard(item) {
 
   card.querySelector(".card__image").src = item.link;
   card.querySelector(".card__header").textContent = item.name;
-  card.querySelector('.card__btn-like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('card__btn-like_active');
+  card
+    .querySelector(".card__btn-like")
+    .addEventListener("click", function (evt) {
+      evt.target.classList.toggle("card__btn-like_active");
     });
+
+  card.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
 
   cardListItem.prepend(card);
 }
@@ -81,6 +87,12 @@ function popupToggleCard() {
   }
 }
 
+//Функция удаления карточки
+function deleteCard(evt) {
+  const cardDel = evt.currentTarget.closest(".card");
+  cardDel.remove();
+}
+
 // --- закрытие popup вне формы
 function clickOverlay(event) {
   if (event.target === event.currentTarget) {
@@ -94,8 +106,12 @@ function addCard(evt) {
   evt.preventDefault();
 
   let createCard = {};
-  createCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
-  createCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
+  createCard.name = evt.currentTarget.querySelector(
+    ".popup__text_type_title"
+  ).value;
+  createCard.link = evt.currentTarget.querySelector(
+    ".popup__text_type_url"
+  ).value;
 
   renderCard(createCard);
   evt.currentTarget.reset();
@@ -103,7 +119,6 @@ function addCard(evt) {
 }
 
 cardFormItem.addEventListener("submit", addCard);
-
 
 //Событие отправки формы редактрования профиля
 function formSubmitHandler(evt) {

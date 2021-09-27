@@ -37,6 +37,7 @@
 @import url(../blocks/cards/_box/cards_box_position.css);
 @import url(../blocks/cards/__items/cards__items.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__btn-delete/card__btn-delete.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__info/card__info.css);
 @import url(../blocks/card/__header/card__header.css);
