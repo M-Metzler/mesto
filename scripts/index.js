@@ -52,6 +52,9 @@ function renderCard(item) {
 
   card.querySelector(".card__image").src = item.link;
   card.querySelector(".card__header").textContent = item.name;
+  card.querySelector('.card__btn-like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('card__btn-like_active');
+    });
 
   cardListItem.prepend(card);
 }
