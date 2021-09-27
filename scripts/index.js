@@ -12,6 +12,51 @@ const jobInput = formProfile.querySelector(".popup__text_type_about-self");
 // объявление переменных профиля
 const profJob = document.querySelector(".profile__about-self");
 const profName = document.querySelector(".profile__name");
+// объявление переменных карточки
+const cardListItem = document.querySelector(".cards__items");
+const cardFormItem = document.querySelector(".popup__container_type_card-form");
+const cardTemplateItem = document.querySelector(".card-template");
+
+const initialCards = [
+  {
+    name: 'Волгоград',
+    link: './images/volgograd.png'
+  },
+  {
+    name: 'Краснодар',
+    link: './images/krasnodar.png'
+  },
+  {
+    name: 'Тюмень',
+    link: './images/tumeni.png'
+  },
+  {
+    name: 'Хабаровск',
+    link: './images/habarovsk.png'
+  },
+  {
+    name: 'Пермь',
+    link: './images/permi.png'
+  },
+  {
+    name: 'Санкт-Петербург',
+    link: './images/piter.png'
+  }
+];
+
+initialCards.reverse();
+
+// функция добавления карточек
+function renderCard(item) {
+  const card = cardTemplateItem.content.cloneNode(true);
+
+  card.querySelector(".card__image").src = item.link;
+  card.querySelector(".card__header").textContent = item.name;
+
+  cardListItem.prepend(card);
+}
+
+initialCards.map(renderCard);
 
 //Открытие/закрытие формы редактирования профиля
 function popupToggleProfle() {
@@ -40,6 +85,22 @@ function clickOverlay(event) {
   }
 }
 //
+
+//Событие отправки формы добавления карточки
+function addCard(evt) {
+  evt.preventDefault();
+
+  let createCard = {};
+  createCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
+  createCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
+
+  renderCard(createCard);
+  evt.currentTarget.reset();
+  popupToggleCard();
+}
+
+cardFormItem.addEventListener("submit", addCard);
+
 
 //Событие отправки формы редактрования профиля
 function formSubmitHandler(evt) {

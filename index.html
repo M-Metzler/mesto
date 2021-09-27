@@ -39,15 +39,15 @@
         <form class="popup__container popup__container_type_card-form" name="card" action="#">
           <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
           <h2 class="popup__title">Новое место</h2>
-          <input class="popup__text popup__text_type_name" type="text" name="title" placeholder="Название" />
-          <input class="popup__text popup__text_type_about-self" type="text" name="url" placeholder="Ссылка на картинку" />
+          <input class="popup__text popup__text_type_title" type="text" name="title" placeholder="Название" />
+          <input class="popup__text popup__text_type_url" type="text" name="url" placeholder="Ссылка на картинку" />
           <input class="popup__btn-save" type="submit" value="Сохранить" />
         </form>
       </div>
 
       <section class="cards cards_box_position">
         <ul class="cards__items">
-          <li class="card">
+          <!-- <li class="card">
             <img class="card__image" src="./images/volgograd.png" alt="Волгоград" />
             <div class="card__info">
               <h2 class="card__header">Волгоград</h2>
@@ -88,7 +88,7 @@
               <h2 class="card__header">Санкт-Петербург</h2>
               <button class="card__btn-like" type="button" aria-label="кнопка лайк"></button>
             </div>
-          </li>
+          </li> -->
         </ul>
       </section>
     </main>
@@ -96,6 +96,15 @@
       <p class="footer__author">&copy; 2021 Mesto Russia</p>
     </footer>
   </div>
+  <template class="card-template">
+    <li class="card">
+      <img class="card__image" src="#" alt="" />
+      <div class="card__info">
+        <h2 class="card__header"></h2>
+        <button class="card__btn-like" type="button" aria-label="кнопка лайк"></button>
+      </div>
+    </li>
+  </template>
   <script src="./scripts/index.js"></script>
 </body>
 
