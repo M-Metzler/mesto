@@ -6,6 +6,7 @@ list-style-type: none;
 background-color: #000000;
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+justify-items: center;
 column-gap: 17px;
 row-gap: 20px;
 }

@@ -1,14 +1,14 @@
 const popupProfile = document.querySelector(".popup_type_profile");
 const popupCard = document.querySelector(".popup_type_card");
+const popupImage = document.querySelector(".popup_type_fullscreen");
 // объявление переменных кнопок открытия/закрытия попапов
 const popupOpenProfile = document.querySelector(".profile__button-edit");
 const popupOpenCard = document.querySelector(".profile__button-add");
 const popupCloseProfile = popupProfile.querySelector(".popup__btn-close");
 const popupCloseCard = popupCard.querySelector(".popup__btn-close");
+const popupCloseImage = popupImage.querySelector(".popup__btn-close");
 // объявление переменных формы профиля
-const formProfile = document.querySelector(
-  ".popup__container_type_profile-form"
-);
+const formProfile = document.querySelector(".popup__container_type_profile-form");
 const nameInput = formProfile.querySelector(".popup__text_type_name");
 const jobInput = formProfile.querySelector(".popup__text_type_about-self");
 // объявление переменных профиля
@@ -18,6 +18,8 @@ const profName = document.querySelector(".profile__name");
 const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
+
+
 
 const initialCards = [
   {
@@ -61,6 +63,7 @@ function renderCard(item) {
     });
 
   card.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
+  card.querySelector(".card__image").addEventListener("click", popupFullscreen);
 
   cardListItem.prepend(card);
 }
@@ -91,6 +94,21 @@ function popupToggleCard() {
 function deleteCard(evt) {
   const cardDel = evt.currentTarget.closest(".card");
   cardDel.remove();
+}
+
+
+//функция открытия fullscreen фотографии
+function popupFullscreen(evt) {
+  popupImage.classList.add("popup_opened");
+
+  popupImage.querySelector(".popup__image").src = evt.currentTarget.src;
+  popupImage.querySelector(".popup__caption").textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
+
+}
+
+//функция закрытия фотографии
+function closeImage() {
+  popupImage.classList.remove("popup_opened");
 }
 
 // --- закрытие popup вне формы
@@ -136,3 +154,4 @@ popupOpenProfile.addEventListener("click", popupToggleProfle);
 popupOpenCard.addEventListener("click", popupToggleCard);
 popupCloseProfile.addEventListener("click", popupToggleProfle);
 popupCloseCard.addEventListener("click", popupToggleCard);
+popupCloseImage.addEventListener("click", closeImage);
