@@ -23,6 +23,7 @@
 @import url(../blocks/popup/_type/popup_type_card.css);
 @import url(../blocks/popup/_type/popup_type_fullscreen.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/_view/popup_view_opaque.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__container/_type/popup__container_type_profile-form.css);
 @import url(../blocks/popup/__image/popup__image.css);

@@ -111,6 +111,7 @@ function closeImage() {
   popupImage.classList.remove("popup_opened");
 }
 
+
 // --- закрытие popup вне формы
 function clickOverlay(event) {
   if (event.target === event.currentTarget) {
