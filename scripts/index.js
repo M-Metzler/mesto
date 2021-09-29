@@ -1,3 +1,4 @@
+// объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
 const popupCard = document.querySelector(".popup_type_card");
 const popupImage = document.querySelector(".popup_type_fullscreen");
@@ -18,8 +19,6 @@ const profName = document.querySelector(".profile__name");
 const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
-
-
 
 const initialCards = [
   {
@@ -55,6 +54,7 @@ function renderCard(item) {
   const card = cardTemplateItem.content.cloneNode(true);
 
   card.querySelector(".card__image").src = item.link;
+  card.querySelector(".card__image").alt = item.name;
   card.querySelector(".card__header").textContent = item.name;
   card
     .querySelector(".card__btn-like")
@@ -63,7 +63,7 @@ function renderCard(item) {
     });
 
   card.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
-  card.querySelector(".card__image").addEventListener("click", popupFullscreen);
+  card.querySelector(".card__image").addEventListener("click", openPopupFullscreen);
 
   cardListItem.prepend(card);
 }
@@ -96,21 +96,19 @@ function deleteCard(evt) {
   cardDel.remove();
 }
 
-
 //функция открытия fullscreen фотографии
-function popupFullscreen(evt) {
+function openPopupFullscreen(evt) {
   popupImage.classList.add("popup_opened");
 
   popupImage.querySelector(".popup__image").src = evt.currentTarget.src;
+  popupImage.querySelector(".popup__image").alt = evt.currentTarget.alt;
   popupImage.querySelector(".popup__caption").textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
-
 }
 
 //функция закрытия фотографии
 function closeImage() {
   popupImage.classList.remove("popup_opened");
 }
-
 
 // --- закрытие popup вне формы
 function clickOverlay(event) {
@@ -121,26 +119,21 @@ function clickOverlay(event) {
 //
 
 //Событие отправки формы добавления карточки
-function addCard(evt) {
+function submitFormCard(evt) {
   evt.preventDefault();
 
-  let createCard = {};
-  createCard.name = evt.currentTarget.querySelector(
-    ".popup__text_type_title"
-  ).value;
-  createCard.link = evt.currentTarget.querySelector(
-    ".popup__text_type_url"
-  ).value;
+  const createCard = {};
+  createCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
+  createCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
 
   renderCard(createCard);
   evt.currentTarget.reset();
   popupToggleCard();
 }
 
-cardFormItem.addEventListener("submit", addCard);
 
 //Событие отправки формы редактрования профиля
-function formSubmitHandler(evt) {
+function submitFormProfile(evt) {
   evt.preventDefault();
 
   profName.textContent = nameInput.value;
@@ -148,7 +141,8 @@ function formSubmitHandler(evt) {
   popupToggleProfle();
 }
 
-formProfile.addEventListener("submit", formSubmitHandler);
+cardFormItem.addEventListener("submit", submitFormCard);
+formProfile.addEventListener("submit", submitFormProfile);
 
 popupProfile.addEventListener("click", clickOverlay);
 popupOpenProfile.addEventListener("click", popupToggleProfle);
@@ -156,3 +150,5 @@ popupOpenCard.addEventListener("click", popupToggleCard);
 popupCloseProfile.addEventListener("click", popupToggleProfle);
 popupCloseCard.addEventListener("click", popupToggleCard);
 popupCloseImage.addEventListener("click", closeImage);
+
+
