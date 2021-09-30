@@ -74,24 +74,18 @@ function renderCard(item) {
 
 initialCards.map(renderCard);
 
-//Открытие/закрытие формы редактирования профиля
-function popupToggleProfle() {
-  if (!popupProfile.classList.contains("popup_opened")) {
+// функция добавления попапам класса popup_opened
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  if (popup === popupProfile) {
     nameInput.value = profName.textContent;
     jobInput.value = profJob.textContent;
-    popupProfile.classList.add("popup_opened");
-  } else {
-    popupProfile.classList.remove("popup_opened");
   }
 }
 
-//Открытие/закрытие формы добавления карточки
-function popupToggleCard() {
-  if (!popupCard.classList.contains("popup_opened")) {
-    popupCard.classList.add("popup_opened");
-  } else {
-    popupCard.classList.remove("popup_opened");
-  }
+// функция удаления у попапов класса popup_opened
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 //Функция удаления карточки
@@ -109,10 +103,6 @@ function openPopupFullscreen(evt) {
   popupImage.querySelector(".popup__caption").textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
 }
 
-//функция закрытия фотографии
-function closeImage() {
-  popupImage.classList.remove("popup_opened");
-}
 
 // --- закрытие popup вне формы
 function clickOverlay(event) {
@@ -132,9 +122,8 @@ function submitFormCard(evt) {
 
   renderCard(addCard);
   evt.currentTarget.reset();
-  popupToggleCard();
+  closePopup(popupCard);
 }
-
 
 //Событие отправки формы редактрования профиля
 function submitFormProfile(evt) {
@@ -142,17 +131,17 @@ function submitFormProfile(evt) {
 
   profName.textContent = nameInput.value;
   profJob.textContent = jobInput.value;
-  popupToggleProfle();
+  closePopup(popupProfile);
 }
 
 cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
 
 popupProfile.addEventListener("click", clickOverlay);
-popupOpenProfile.addEventListener("click", popupToggleProfle);
-popupOpenCard.addEventListener("click", popupToggleCard);
-popupCloseProfile.addEventListener("click", popupToggleProfle);
-popupCloseCard.addEventListener("click", popupToggleCard);
-popupCloseImage.addEventListener("click", closeImage);
+popupOpenProfile.addEventListener("click", () => openPopup(popupProfile));
+popupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
+popupOpenCard.addEventListener("click", () => openPopup(popupCard));
+popupCloseCard.addEventListener("click", () => closePopup(popupCard));
+popupCloseImage.addEventListener("click", () => closePopup(popupImage));
 
 
