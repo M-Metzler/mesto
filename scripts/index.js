@@ -61,15 +61,15 @@ function createCard(item) {
     .addEventListener("click", function (evt) {
       evt.target.classList.toggle("card__btn-like_active");
     });
-    newCard.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
-    cardImage.addEventListener("click", openPopupFullscreen);
-  return(newCard);
+  newCard.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
+  cardImage.addEventListener("click", openPopupFullscreen);
+  return (newCard);
 }
 
 // функция добавления карточки
 function renderCard(item) {
   const card = createCard(item);
-   cardListItem.prepend(card);
+  cardListItem.prepend(card);
 }
 
 initialCards.map(renderCard);
@@ -96,7 +96,7 @@ function deleteCard(evt) {
 
 //функция открытия fullscreen фотографии
 function openPopupFullscreen(evt) {
-  popupImage.classList.add("popup_opened");
+  openPopup(popupImage);
 
   popupImage.querySelector(".popup__image").src = evt.currentTarget.src;
   popupImage.querySelector(".popup__image").alt = evt.currentTarget.alt;
@@ -107,7 +107,9 @@ function openPopupFullscreen(evt) {
 // --- закрытие popup вне формы
 function clickOverlay(event) {
   if (event.target === event.currentTarget) {
-    popupToggleProfle();
+    closePopup(popupProfile);
+    closePopup(popupCard);
+    closePopup(popupImage);
   }
 }
 //
@@ -137,7 +139,10 @@ function submitFormProfile(evt) {
 cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
 
+
 popupProfile.addEventListener("click", clickOverlay);
+popupCard.addEventListener("click", clickOverlay);
+popupImage.addEventListener("click", clickOverlay);
 popupOpenProfile.addEventListener("click", () => openPopup(popupProfile));
 popupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
 popupOpenCard.addEventListener("click", () => openPopup(popupCard));
