@@ -49,23 +49,27 @@ const initialCards = [
 
 initialCards.reverse();
 
-// функция добавления карточек
-function renderCard(item) {
-  const card = cardTemplateItem.content.cloneNode(true);
-
-  card.querySelector(".card__image").src = item.link;
-  card.querySelector(".card__image").alt = item.name;
-  card.querySelector(".card__header").textContent = item.name;
-  card
+// функция создания карточки
+function createCard(item) {
+  const newCard = cardTemplateItem.content.cloneNode(true);
+  const cardImage = newCard.querySelector(".card__image");
+  cardImage.src = item.link;
+  cardImage.alt = item.name;
+  newCard.querySelector(".card__header").textContent = item.name;
+  newCard
     .querySelector(".card__btn-like")
     .addEventListener("click", function (evt) {
       evt.target.classList.toggle("card__btn-like_active");
     });
+    newCard.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
+    cardImage.addEventListener("click", openPopupFullscreen);
+  return(newCard);
+}
 
-  card.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
-  card.querySelector(".card__image").addEventListener("click", openPopupFullscreen);
-
-  cardListItem.prepend(card);
+// функция добавления карточки
+function renderCard(item) {
+  const card = createCard(item);
+   cardListItem.prepend(card);
 }
 
 initialCards.map(renderCard);
@@ -122,11 +126,11 @@ function clickOverlay(event) {
 function submitFormCard(evt) {
   evt.preventDefault();
 
-  const createCard = {};
-  createCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
-  createCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
+  const addCard = {};
+  addCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
+  addCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
 
-  renderCard(createCard);
+  renderCard(addCard);
   evt.currentTarget.reset();
   popupToggleCard();
 }
