@@ -1,7 +1,10 @@
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
 const popupCard = document.querySelector(".popup_type_card");
+// переменные popup фотографии fullscreen
 const popupImage = document.querySelector(".popup_type_fullscreen");
+const popupImageFullscreen = popupImage.querySelector(".popup__image");
+const popupImageCaption = popupImage.querySelector(".popup__caption");
 // объявление переменных кнопок открытия/закрытия попапов
 const popupOpenProfile = document.querySelector(".profile__button-edit");
 const popupOpenCard = document.querySelector(".profile__button-add");
@@ -77,10 +80,6 @@ initialCards.map(renderCard);
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  if (popup === popupProfile) {
-    nameInput.value = profName.textContent;
-    jobInput.value = profJob.textContent;
-  }
 }
 
 // функция удаления у попапов класса popup_opened
@@ -98,9 +97,9 @@ function deleteCard(evt) {
 function openPopupFullscreen(evt) {
   openPopup(popupImage);
 
-  popupImage.querySelector(".popup__image").src = evt.currentTarget.src;
-  popupImage.querySelector(".popup__image").alt = evt.currentTarget.alt;
-  popupImage.querySelector(".popup__caption").textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
+  popupImageFullscreen.src = evt.currentTarget.src;
+  popupImageFullscreen.alt = evt.currentTarget.alt;
+  popupImageCaption.textContent = evt.currentTarget.alt;
 }
 
 
@@ -143,7 +142,11 @@ formProfile.addEventListener("submit", submitFormProfile);
 popupProfile.addEventListener("click", clickOverlay);
 popupCard.addEventListener("click", clickOverlay);
 popupImage.addEventListener("click", clickOverlay);
-popupOpenProfile.addEventListener("click", () => openPopup(popupProfile));
+popupOpenProfile.addEventListener("click", () => {
+  openPopup(popupProfile)
+  nameInput.value = profName.textContent;
+  jobInput.value = profJob.textContent;
+});
 popupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
 popupOpenCard.addEventListener("click", () => openPopup(popupCard));
 popupCloseCard.addEventListener("click", () => closePopup(popupCard));
