@@ -102,16 +102,28 @@ function openPopupFullscreen(evt) {
   popupImageCaption.textContent = evt.currentTarget.alt;
 }
 
-
-// --- закрытие popup вне формы
-function clickOverlay(event) {
+//--------Функции закрытия попапов кликов на оверлей
+// --- закрытие popup профиля вне формы
+function clickOverlayProfile(event) {
   if (event.target === event.currentTarget) {
     closePopup(popupProfile);
+  }
+}
+
+// --- закрытие popup карточки вне формы
+function clickOverlayCard(event) {
+  if (event.target === event.currentTarget) {
     closePopup(popupCard);
+  }
+}
+
+// --- закрытие popup фотографии вне формы
+function clickOverlayImage(event) {
+  if (event.target === event.currentTarget) {
     closePopup(popupImage);
   }
 }
-//
+
 
 //Событие отправки формы добавления карточки
 function submitFormCard(evt) {
@@ -139,9 +151,9 @@ cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
 
 
-popupProfile.addEventListener("click", clickOverlay);
-popupCard.addEventListener("click", clickOverlay);
-popupImage.addEventListener("click", clickOverlay);
+popupProfile.addEventListener("click", clickOverlayProfile);
+popupCard.addEventListener("click", clickOverlayCard);
+popupImage.addEventListener("click", clickOverlayImage);
 popupOpenProfile.addEventListener("click", () => {
   openPopup(popupProfile)
   nameInput.value = profName.textContent;
