@@ -100,31 +100,60 @@ function openPopupFullscreen(evt) {
   popupImageFullscreen.src = evt.currentTarget.src;
   popupImageFullscreen.alt = evt.currentTarget.alt;
   popupImageCaption.textContent = evt.currentTarget.alt;
+  document.addEventListener('keydown', closeImageEsc);
 }
 
-//--------Функции закрытия попапов кликов на оверлей
-// --- закрытие popup профиля вне формы
+//--------Функции закрытия попапов кликов на оверлей-------
+// --- закрытие popup Профиля вне формы
 function clickOverlayProfile(event) {
   if (event.target === event.currentTarget) {
     closePopup(popupProfile);
+    document.removeEventListener('keydown', closeProfileEsc);
   }
 }
 
-// --- закрытие popup карточки вне формы
+// --- закрытие popup Карточки вне формы
 function clickOverlayCard(event) {
   if (event.target === event.currentTarget) {
     closePopup(popupCard);
+    document.removeEventListener('keydown', closeCardEsc);
   }
 }
 
-// --- закрытие popup фотографии вне формы
+// --- закрытие popup Фотографии вне формы
 function clickOverlayImage(event) {
   if (event.target === event.currentTarget) {
     closePopup(popupImage);
+    document.removeEventListener('keydown', closeImageEsc);
   }
 }
 
+// -------Функции закрытия по Escape----------
+//--- Функция закрытия попапа Профиля по Esc
+function closeProfileEsc(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupProfile);
+    document.removeEventListener('keydown', closeProfileEsc);
+  }
+}
 
+//--- Функция закрытия попапа Карточки по Esc
+function closeCardEsc(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupCard);
+    document.removeEventListener('keydown', closeCardEsc);
+  }
+}
+
+//--- Функция закрытия попапа Фотографии по Esc
+function closeImageEsc(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupImage);
+    document.removeEventListener('keydown', closeImageEsc);
+  }
+}
+
+// -------
 //Событие отправки формы добавления карточки
 function submitFormCard(evt) {
   evt.preventDefault();
@@ -151,17 +180,36 @@ cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
 
 
+//Слушатели оверлей
 popupProfile.addEventListener("click", clickOverlayProfile);
 popupCard.addEventListener("click", clickOverlayCard);
 popupImage.addEventListener("click", clickOverlayImage);
+
+//Слушатели Профиля
 popupOpenProfile.addEventListener("click", () => {
-  openPopup(popupProfile)
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
+  openPopup(popupProfile)
+  document.addEventListener('keydown', closeProfileEsc);
 });
-popupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
-popupOpenCard.addEventListener("click", () => openPopup(popupCard));
-popupCloseCard.addEventListener("click", () => closePopup(popupCard));
-popupCloseImage.addEventListener("click", () => closePopup(popupImage));
+popupCloseProfile.addEventListener("click", () => {
+  closePopup(popupProfile);
+  document.removeEventListener('keydown', closeProfileEsc);
+});
 
+//Слушатели Карточки
+popupOpenCard.addEventListener("click", () => {
+  openPopup(popupCard);
+  document.addEventListener('keydown', closeCardEsc);
+});
+popupCloseCard.addEventListener("click", () => {
+  closePopup(popupCard);
+  document.removeEventListener('keydown', closeCardEsc);
+});
+
+//Слушатель Фотографии
+popupCloseImage.addEventListener("click", () => {
+  closePopup(popupImage);
+  document.removeEventListener('keydown', closeImageEsc);
+});
 
