@@ -80,11 +80,13 @@ initialCards.map(renderCard);
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener("keydown", closePopupEsc);
 }
 
 // функция удаления у попапов класса popup_opened
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener("keydown", closePopupEsc);
 }
 
 //Функция удаления карточки
@@ -100,56 +102,20 @@ function openPopupFullscreen(evt) {
   popupImageFullscreen.src = evt.currentTarget.src;
   popupImageFullscreen.alt = evt.currentTarget.alt;
   popupImageCaption.textContent = evt.currentTarget.alt;
-  document.addEventListener('keydown', closeImageEsc);
 }
 
-//--------Функции закрытия попапов кликов на оверлей-------
-// --- закрытие popup Профиля вне формы
-function clickOverlayProfile(event) {
+//--------Функции закрытия попапов кликом на оверлей-------
+function closePopupClickOverlay(event) {
   if (event.target === event.currentTarget) {
-    closePopup(popupProfile);
-    document.removeEventListener('keydown', closeProfileEsc);
-  }
-}
-
-// --- закрытие popup Карточки вне формы
-function clickOverlayCard(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popupCard);
-    document.removeEventListener('keydown', closeCardEsc);
-  }
-}
-
-// --- закрытие popup Фотографии вне формы
-function clickOverlayImage(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(popupImage);
-    document.removeEventListener('keydown', closeImageEsc);
+    closePopup(event.target);
   }
 }
 
 // -------Функции закрытия по Escape----------
-//--- Функция закрытия попапа Профиля по Esc
-function closeProfileEsc(evt) {
+function closePopupEsc(evt) {
+  const popupVisible = document.querySelector(".popup_opened");
   if (evt.key === 'Escape') {
-    closePopup(popupProfile);
-    document.removeEventListener('keydown', closeProfileEsc);
-  }
-}
-
-//--- Функция закрытия попапа Карточки по Esc
-function closeCardEsc(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupCard);
-    document.removeEventListener('keydown', closeCardEsc);
-  }
-}
-
-//--- Функция закрытия попапа Фотографии по Esc
-function closeImageEsc(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(popupImage);
-    document.removeEventListener('keydown', closeImageEsc);
+    closePopup(popupVisible);
   }
 }
 
@@ -181,35 +147,22 @@ formProfile.addEventListener("submit", submitFormProfile);
 
 
 //Слушатели оверлей
-popupProfile.addEventListener("click", clickOverlayProfile);
-popupCard.addEventListener("click", clickOverlayCard);
-popupImage.addEventListener("click", clickOverlayImage);
+popupProfile.addEventListener("click", closePopupClickOverlay);
+popupCard.addEventListener("click", closePopupClickOverlay);
+popupImage.addEventListener("click", closePopupClickOverlay);
 
 //Слушатели Профиля
 popupOpenProfile.addEventListener("click", () => {
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
   openPopup(popupProfile)
-  document.addEventListener('keydown', closeProfileEsc);
 });
-popupCloseProfile.addEventListener("click", () => {
-  closePopup(popupProfile);
-  document.removeEventListener('keydown', closeProfileEsc);
-});
+popupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
 
 //Слушатели Карточки
-popupOpenCard.addEventListener("click", () => {
-  openPopup(popupCard);
-  document.addEventListener('keydown', closeCardEsc);
-});
-popupCloseCard.addEventListener("click", () => {
-  closePopup(popupCard);
-  document.removeEventListener('keydown', closeCardEsc);
-});
+popupOpenCard.addEventListener("click", () => openPopup(popupCard));
+popupCloseCard.addEventListener("click", () => closePopup(popupCard));
 
 //Слушатель Фотографии
-popupCloseImage.addEventListener("click", () => {
-  closePopup(popupImage);
-  document.removeEventListener('keydown', closeImageEsc);
-});
+popupCloseImage.addEventListener("click", () => closePopup(popupImage));
 
