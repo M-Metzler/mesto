@@ -23,6 +23,14 @@ const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
+//кнопки "Сохранить" форм
+const submitButtonCardForm = cardFormItem.querySelector('.popup__btn-save');
+const submitButtonProfileForm = formProfile.querySelector('.popup__btn-save');
+// переменные ошибок input
+const errorName = formProfile.querySelector('#name-error');
+const errorJob = formProfile.querySelector('#about-self-error');
+
+
 const initialCards = [
   {
     name: "Волгоград",
@@ -95,6 +103,25 @@ function deleteCard(evt) {
   cardDel.remove();
 }
 
+//функция деактивации кнопки "сохранить" формы карточки
+const disabledSubmitButton = () => {
+  const submitButtonCardForm = cardFormItem.querySelector('.popup__btn-save');
+  submitButtonCardForm.setAttribute('disabled', true);
+  submitButtonCardForm.classList.add('popup__btn-save_disabled');
+}
+
+//функция проверки формы профиля на валидность
+const checkFormProfileValidity = () => {
+  if(formProfile.checkValidity()) {
+    submitButtonProfileForm.removeAttribute('disabled');
+    submitButtonProfileForm.classList.remove('popup__btn-save_disabled');
+    errorName.textContent = '';
+    errorJob.textContent = '';
+    nameInput.classList.remove('popup__text_type_error');
+    jobInput.classList.remove('popup__text_type_error');
+  }
+}
+
 //функция открытия fullscreen фотографии
 function openPopupFullscreen(evt) {
   openPopup(popupImage);
@@ -155,12 +182,16 @@ popupImage.addEventListener("click", closePopupClickOverlay);
 popupOpenProfile.addEventListener("click", () => {
   nameInput.value = profName.textContent;
   jobInput.value = profJob.textContent;
-  openPopup(popupProfile)
+  openPopup(popupProfile);
+  checkFormProfileValidity();
 });
 popupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
 
 //Слушатели Карточки
-popupOpenCard.addEventListener("click", () => openPopup(popupCard));
+popupOpenCard.addEventListener("click", () => {
+  openPopup(popupCard);
+  disabledSubmitButton();
+});
 popupCloseCard.addEventListener("click", () => closePopup(popupCard));
 
 //Слушатель Фотографии
