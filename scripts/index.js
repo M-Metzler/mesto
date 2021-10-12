@@ -174,9 +174,9 @@ formProfile.addEventListener("submit", submitFormProfile);
 
 
 //Слушатели оверлей
-popupProfile.addEventListener("click", closePopupClickOverlay);
-popupCard.addEventListener("click", closePopupClickOverlay);
-popupImage.addEventListener("click", closePopupClickOverlay);
+popupProfile.addEventListener("mousedown", closePopupClickOverlay);
+popupCard.addEventListener("mousedown", closePopupClickOverlay);
+popupImage.addEventListener("mousedown", closePopupClickOverlay);
 
 //Слушатели Профиля
 popupOpenProfile.addEventListener("click", () => {
