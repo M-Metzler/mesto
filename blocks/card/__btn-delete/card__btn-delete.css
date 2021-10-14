@@ -9,6 +9,7 @@
   right: 20px;
   top: 20px;
   transition: opacity 1s ease-out;
+  z-index: 15;
 }
 
 .card__btn-delete:hover {
