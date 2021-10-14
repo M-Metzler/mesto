@@ -23,12 +23,6 @@ const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
-//кнопки "Сохранить" форм
-const submitButtonCardForm = cardFormItem.querySelector('.popup__btn-save');
-const submitButtonProfileForm = formProfile.querySelector('.popup__btn-save');
-// переменные ошибок input
-const errorName = formProfile.querySelector('#name-error');
-const errorJob = formProfile.querySelector('#about-self-error');
 
 //-----Функции Карточек--------
 // функция создания карточки
@@ -82,32 +76,13 @@ function closePopup(popup) {
   document.removeEventListener("keydown", closePopupEsc);
 }
 
-//функция деактивации кнопки "сохранить" формы карточки
-const disabledSubmitButton = () => {
-  const submitButtonCardForm = cardFormItem.querySelector('.popup__btn-save');
-  submitButtonCardForm.setAttribute('disabled', true);
-  submitButtonCardForm.classList.add('popup__btn-save_disabled');
-}
-
-//функция проверки формы профиля на валидность
-const checkFormProfileValidity = () => {
-  if(formProfile.checkValidity()) {
-    submitButtonProfileForm.removeAttribute('disabled');
-    submitButtonProfileForm.classList.remove('popup__btn-save_disabled');
-    errorName.textContent = '';
-    errorJob.textContent = '';
-    nameInput.classList.remove('popup__text_type_error');
-    jobInput.classList.remove('popup__text_type_error');
-  }
-}
-
 //функция открытия fullscreen фотографии
 function openPopupFullscreen(evt) {
   openPopup(popupImage);
 
   popupImageFullscreen.src = evt.currentTarget.src;
   popupImageFullscreen.alt = evt.currentTarget.alt;
-  popupImageCaption.textContent = evt.currentTarget.alt;
+  popupImageCaption.textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
 }
 
 //--------Функции закрытия попапов кликом на оверлей-------
@@ -162,15 +137,16 @@ buttonPopupOpenProfile.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   openPopup(popupProfile);
-  // checkFormProfileValidity();
 });
+
 buttonPopupCloseProfile.addEventListener("click", () => closePopup(popupProfile));
 
 //Слушатели Карточки
 buttonPopupOpenCard.addEventListener("click", () => {
   openPopup(popupCard);
-  // disabledSubmitButton();
+
 });
+
 buttonPopupCloseCard.addEventListener("click", () => closePopup(popupCard));
 
 //Слушатель Фотографии
