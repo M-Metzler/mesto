@@ -30,7 +30,7 @@ const submitButtonProfileForm = formProfile.querySelector('.popup__btn-save');
 const errorName = formProfile.querySelector('#name-error');
 const errorJob = formProfile.querySelector('#about-self-error');
 
-
+//-----Функции Карточек--------
 // функция создания карточки
 function createCard(item) {
   const newCard = cardTemplateItem.content.cloneNode(true);
@@ -54,8 +54,21 @@ function renderCard(item) {
   cardListItem.prepend(card);
 }
 
+//функция отрисовки массива карточек
+function addInitialCardsArray(item) {
+  const arrayCards = item.map(createCard);
+  cardListItem.append(...arrayCards);
+}
 
-initialCards.map(renderCard);
+addInitialCardsArray(initialCards);
+
+//Функция удаления карточки
+function deleteCard(evt) {
+  const selectedCard = evt.currentTarget.closest(".card");
+  selectedCard.remove();
+}
+
+//-------------
 
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
@@ -67,12 +80,6 @@ function openPopup(popup) {
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener("keydown", closePopupEsc);
-}
-
-//Функция удаления карточки
-function deleteCard(evt) {
-  const selectedCard = evt.currentTarget.closest(".card");
-  selectedCard.remove();
 }
 
 //функция деактивации кнопки "сохранить" формы карточки
@@ -118,7 +125,7 @@ function closePopupEsc(evt) {
   }
 }
 
-// -------
+// -------События ----
 //Событие отправки формы добавления карточки
 function submitFormCard(evt) {
   evt.preventDefault();

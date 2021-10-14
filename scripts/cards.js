@@ -26,4 +26,3 @@ const initialCards = [
   },
 ];
 
-initialCards.reverse();

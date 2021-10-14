@@ -25,42 +25,6 @@
         <button class="profile__button-add" type="button" aria-label="кнопка добавить карточку"></button>
       </section>
 
-      <div class="popup popup_type_profile">
-        <form class="popup__container popup__container_type_profile-form" name="profile" action="#" novalidate>
-          <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
-          <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__text popup__text_type_name" type="text" id ="name" name="name" autocomplete="off" minlength="2"
-            maxlength="40" required />
-          <span class="popup__text-error popup__text-error_visible" id="name-error"></span>
-          <input class="popup__text popup__text_type_about-self" type="text" id="about-self" name="about-self" autocomplete="off"
-            minlength="2" maxlength="200" required />
-          <span class="popup__text-error" id="about-self-error"></span>
-          <input class="popup__btn-save" type="submit" value="Сохранить" />
-        </form>
-      </div>
-
-      <div class="popup popup_type_card">
-        <form class="popup__container popup__container_type_card-form" name="card" action="#" novalidate>
-          <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
-          <h2 class="popup__title">Новое место</h2>
-          <input class="popup__text popup__text_type_title" type="text" id="title" name="title" autocomplete="off"
-            placeholder="Название" minlength="2" maxlength="30" required />
-          <span class="popup__text-error" id="title-error"></span>
-          <input class="popup__text popup__text_type_url" type="url" id="url" name="url" autocomplete="off"
-            placeholder="Ссылка на картинку" required />
-          <span class="popup__text-error" id="url-error"></span>
-          <input class="popup__btn-save" type="submit" value="Сохранить" />
-        </form>
-      </div>
-
-      <div class="popup popup_view_opaque popup_type_fullscreen">
-        <div class="popup__wrap">
-          <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
-          <img class="popup__image" src="#" alt="фотография">
-          <p class="popup__caption"></p>
-        </div>
-      </div>
-
       <section class="cards cards_box_position">
         <ul class="cards__items">
         </ul>
@@ -70,6 +34,43 @@
       <p class="footer__author">&copy; 2021 Mesto Russia</p>
     </footer>
   </div>
+
+  <div class="popup popup_type_profile">
+    <form class="popup__container popup__container_type_profile-form" name="profile" action="#" novalidate>
+      <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input class="popup__text popup__text_type_name" type="text" id="name" name="name" autocomplete="off"
+        minlength="2" maxlength="40" required />
+      <span class="popup__text-error popup__text-error_visible" id="name-error"></span>
+      <input class="popup__text popup__text_type_about-self" type="text" id="about-self" name="about-self"
+        autocomplete="off" minlength="2" maxlength="200" required />
+      <span class="popup__text-error" id="about-self-error"></span>
+      <input class="popup__btn-save" type="submit" value="Сохранить" />
+    </form>
+  </div>
+
+  <div class="popup popup_type_card">
+    <form class="popup__container popup__container_type_card-form" name="card" action="#" novalidate>
+      <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <input class="popup__text popup__text_type_title" type="text" id="title" name="title" autocomplete="off"
+        placeholder="Название" minlength="2" maxlength="30" required />
+      <span class="popup__text-error" id="title-error"></span>
+      <input class="popup__text popup__text_type_url" type="url" id="url" name="url" autocomplete="off"
+        placeholder="Ссылка на картинку" required />
+      <span class="popup__text-error" id="url-error"></span>
+      <input class="popup__btn-save" type="submit" value="Сохранить" />
+    </form>
+  </div>
+
+  <div class="popup popup_view_opaque popup_type_fullscreen">
+    <div class="popup__wrap">
+      <button class="popup__btn-close" type="button" aria-label="кнопка закрыть"></button>
+      <img class="popup__image" src="#" alt="фотография">
+      <p class="popup__caption"></p>
+    </div>
+  </div>
+
   <template class="card-template">
     <li class="card">
       <button class="card__btn-delete"></button>
