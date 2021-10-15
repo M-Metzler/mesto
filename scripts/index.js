@@ -23,6 +23,7 @@ const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
+const buttonSubmitCardForm = cardFormItem.querySelector('.popup__btn-save');
 
 //-----Функции Карточек--------
 // функция создания карточки
@@ -49,12 +50,12 @@ function renderCard(item) {
 }
 
 //функция отрисовки массива карточек
-function addInitialCardsArray(item) {
+function addInitialCards(item) {
   const arrayCards = item.map(createCard);
   cardListItem.append(...arrayCards);
 }
 
-addInitialCardsArray(initialCards);
+addInitialCards(initialCards);
 
 //Функция удаления карточки
 function deleteCard(evt) {
@@ -143,8 +144,8 @@ buttonPopupCloseProfile.addEventListener("click", () => closePopup(popupProfile)
 
 //Слушатели Карточки
 buttonPopupOpenCard.addEventListener("click", () => {
+  toggleButtonState(buttonSubmitCardForm, cardFormItem.checkValidity(), enableValidation);
   openPopup(popupCard);
-
 });
 
 buttonPopupCloseCard.addEventListener("click", () => closePopup(popupCard));
