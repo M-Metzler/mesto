@@ -144,7 +144,8 @@ buttonPopupCloseProfile.addEventListener("click", () => closePopup(popupProfile)
 
 //Слушатели Карточки
 buttonPopupOpenCard.addEventListener("click", () => {
-  toggleButtonState(buttonSubmitCardForm, cardFormItem.checkValidity(), enableValidation);
+  const inputList = Array.from(popupCard.querySelectorAll(enableValidation.inputSelector));
+  toggleButtonState(inputList, buttonSubmitCardForm, enableValidation);
   openPopup(popupCard);
 });
 
