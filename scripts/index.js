@@ -27,35 +27,35 @@ const buttonSubmitCardForm = cardFormItem.querySelector('.popup__btn-save');
 
 //-----Функции Карточек--------
 // функция создания карточки
-function createCard(item) {
-  const newCard = cardTemplateItem.content.cloneNode(true);
-  const cardImage = newCard.querySelector(".card__image");
-  cardImage.src = item.link;
-  cardImage.alt = item.name;
-  newCard.querySelector(".card__header").textContent = item.name;
-  newCard
-    .querySelector(".card__btn-like")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("card__btn-like_active");
-    });
-  newCard.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
-  cardImage.addEventListener("click", openPopupFullscreen);
-  return newCard;
-}
+// function createCard(item) {
+//   const newCard = cardTemplateItem.content.cloneNode(true);
+//   const cardImage = newCard.querySelector(".card__image");
+//   cardImage.src = item.link;
+//   cardImage.alt = item.name;
+//   newCard.querySelector(".card__header").textContent = item.name;
+//   newCard
+//     .querySelector(".card__btn-like")
+//     .addEventListener("click", function (evt) {
+//       evt.target.classList.toggle("card__btn-like_active");
+//     });
+//   newCard.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
+//   cardImage.addEventListener("click", openPopupFullscreen);
+//   return newCard;
+// }
 
 // функция добавления карточки
-function renderCard(item) {
-  const card = createCard(item);
-  cardListItem.prepend(card);
-}
+// function renderCard(item) {
+//   const card = createCard(item);
+//   cardListItem.prepend(card);
+// }
 
 //функция отрисовки массива карточек
-function addInitialCards(item) {
-  const arrayCards = item.map(createCard);
-  cardListItem.append(...arrayCards);
-}
+// function addInitialCards(item) {
+//   const arrayCards = item.map(createCard);
+//   cardListItem.append(...arrayCards);
+// }
 
-addInitialCards(initialCards);
+// addInitialCards(initialCards);
 
 //Функция удаления карточки
 function deleteCard(evt) {
