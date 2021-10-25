@@ -1,3 +1,5 @@
+import { Card } from './Card.js';
+
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
 const popupCard = document.querySelector(".popup_type_card");
@@ -24,6 +26,12 @@ const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
 const buttonSubmitCardForm = cardFormItem.querySelector('.popup__btn-save');
+
+function addNewCard(item) {
+  const card = new Card(item, '.card-template');
+  const cardElement = card.generateCard();
+  document.querySelector('.cards__items').prepend(cardElement);
+};
 
 //-----Функции Карточек--------
 // функция создания карточки
@@ -110,7 +118,7 @@ function submitFormCard(evt) {
   addCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
   addCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
 
-  renderCard(addCard);
+  addNewCard(addCard);
   closePopup(popupCard);
   evt.currentTarget.reset();
 }

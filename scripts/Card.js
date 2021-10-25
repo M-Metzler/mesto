@@ -72,3 +72,5 @@ initialCards.forEach((item) => {
   // Добавляем в DOM
   document.querySelector('.cards__items').append(cardElement);
 });
+
+export { Card };
