@@ -58,10 +58,10 @@ const buttonSubmitCardForm = cardFormItem.querySelector('.popup__btn-save');
 // addInitialCards(initialCards);
 
 //Функция удаления карточки
-function deleteCard(evt) {
-  const selectedCard = evt.currentTarget.closest(".card");
-  selectedCard.remove();
-}
+// function deleteCard(evt) {
+//   const selectedCard = evt.currentTarget.closest(".card");
+//   selectedCard.remove();
+// }
 
 //-------------
 
@@ -78,13 +78,13 @@ function closePopup(popup) {
 }
 
 //функция открытия fullscreen фотографии
-function openPopupFullscreen(evt) {
-  openPopup(popupImage);
+// function openPopupFullscreen(evt) {
+//   openPopup(popupImage);
 
-  popupImageFullscreen.src = evt.currentTarget.src;
-  popupImageFullscreen.alt = evt.currentTarget.alt;
-  popupImageCaption.textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
-}
+//   popupImageFullscreen.src = evt.currentTarget.src;
+//   popupImageFullscreen.alt = evt.currentTarget.alt;
+//   popupImageCaption.textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
+// }
 
 //--------Функции закрытия попапов кликом на оверлей-------
 function closePopupClickOverlay(event) {
@@ -154,3 +154,4 @@ buttonPopupCloseCard.addEventListener("click", () => closePopup(popupCard));
 //Слушатель Фотографии
 buttonPopupCloseImage.addEventListener("click", () => closePopup(popupImage));
 
+export {openPopup};
