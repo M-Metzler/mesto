@@ -1,4 +1,5 @@
 import { Card } from './Card.js';
+import { FormValidator, enableValidationSettings } from './FormValidator.js';
 
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
@@ -136,6 +137,11 @@ cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
 
 
+const profileFormValidator = new FormValidator(enableValidationSettings, formProfile);
+profileFormValidator.enableValidation();
+const cardFormValidator  = new FormValidator(enableValidationSettings, cardFormItem);
+cardFormValidator.enableValidation();
+
 //Слушатели оверлей
 popupProfile.addEventListener("mousedown", closePopupClickOverlay);
 popupCard.addEventListener("mousedown", closePopupClickOverlay);
@@ -152,8 +158,8 @@ buttonPopupCloseProfile.addEventListener("click", () => closePopup(popupProfile)
 
 //Слушатели Карточки
 buttonPopupOpenCard.addEventListener("click", () => {
-  const inputList = Array.from(popupCard.querySelectorAll(enableValidation.inputSelector));
-  toggleButtonState(inputList, buttonSubmitCardForm, enableValidation);
+  // const inputList = Array.from(popupCard.querySelectorAll(enableValidation.inputSelector));
+  // toggleButtonState(inputList, buttonSubmitCardForm, enableValidation);
   openPopup(popupCard);
 });
 
@@ -163,3 +169,4 @@ buttonPopupCloseCard.addEventListener("click", () => closePopup(popupCard));
 buttonPopupCloseImage.addEventListener("click", () => closePopup(popupImage));
 
 export {openPopup};
+
