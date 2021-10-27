@@ -136,7 +136,7 @@ function submitFormProfile(evt) {
 cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
 
-
+//Экземпляры класса для каждой формы
 const profileFormValidator = new FormValidator(enableValidationSettings, formProfile);
 profileFormValidator.enableValidation();
 const cardFormValidator  = new FormValidator(enableValidationSettings, cardFormItem);
@@ -151,6 +151,7 @@ popupImage.addEventListener("mousedown", closePopupClickOverlay);
 buttonPopupOpenProfile.addEventListener("click", () => {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  profileFormValidator.resetValidation();
   openPopup(popupProfile);
 });
 
@@ -158,8 +159,7 @@ buttonPopupCloseProfile.addEventListener("click", () => closePopup(popupProfile)
 
 //Слушатели Карточки
 buttonPopupOpenCard.addEventListener("click", () => {
-  // const inputList = Array.from(popupCard.querySelectorAll(enableValidation.inputSelector));
-  // toggleButtonState(inputList, buttonSubmitCardForm, enableValidation);
+  cardFormValidator.resetValidation();
   openPopup(popupCard);
 });
 

@@ -19,20 +19,29 @@ class FormValidator {
     this._inputList = Array.from(formElement.querySelectorAll(enableValidationSettings.inputSelector));
     this._submitButton = formElement.querySelector(enableValidationSettings.submitButtonSelector);
   }
+  //Очистка формы
+  resetValidation() {
+    this._toggleButtonState();
+    this._inputList.forEach(inputElement => {
+      const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+      this._hideInputError(inputElement, errorElement);
+    });
+  }
   //проверка inputs на валидность
-  _hasInvalidInput() {
-    return this._inputList.some((inputElement) => {
-      return !inputElement.validity.valid;
-    })
-  };
+  // _hasInvalidInput() {
+  //   return this._inputList.some((inputElement) => {
+  //     return !inputElement.validity.valid;
+  //   })
+  // };
   //переключение кнопки отправки формы
   _toggleButtonState() {
-    if (this._hasInvalidInput()) {
-      this._submitButton.classList.add(this._inactiveButtonClass);
-      this._submitButton.disabled = true;
-    } else {
+    const isFormValid = this._formElement.checkValidity();
+    if (isFormValid) {
       this._submitButton.classList.remove(this._inactiveButtonClass);
       this._submitButton.disabled = false;
+    } else {
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.disabled = true;
     }
   };
   //показать ошибку input
@@ -41,8 +50,8 @@ class FormValidator {
     errorElement.classList.add(this._errorClass);
     errorElement.textContent = inputElement.validationMessage;
   };
-//скрыть ошибку input
-  _hideInputError = (inputElement, errorElement) => {
+  //скрыть ошибку input
+  _hideInputError(inputElement, errorElement) {
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = "";
@@ -58,8 +67,8 @@ class FormValidator {
   };
   //Слушатели
   _setEventListeners() {
-    this._toggleButtonState();
-    this._inputList.forEach(inputElement => {
+
+    Array.from(this._inputList).forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._toggleButtonState();
         this._checkInputValidity(inputElement);
