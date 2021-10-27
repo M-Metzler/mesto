@@ -26,53 +26,12 @@ const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
-const buttonSubmitCardForm = cardFormItem.querySelector('.popup__btn-save');
 
-function addNewCard(item) {
+function renderCard(item) {
   const card = new Card(item, '.card-template');
   const cardElement = card.generateCard();
   document.querySelector('.cards__items').prepend(cardElement);
 };
-
-//-----Функции Карточек--------
-// функция создания карточки
-// function createCard(item) {
-//   const newCard = cardTemplateItem.content.cloneNode(true);
-//   const cardImage = newCard.querySelector(".card__image");
-//   cardImage.src = item.link;
-//   cardImage.alt = item.name;
-//   newCard.querySelector(".card__header").textContent = item.name;
-//   newCard
-//     .querySelector(".card__btn-like")
-//     .addEventListener("click", function (evt) {
-//       evt.target.classList.toggle("card__btn-like_active");
-//     });
-//   newCard.querySelector(".card__btn-delete").addEventListener("click", deleteCard);
-//   cardImage.addEventListener("click", openPopupFullscreen);
-//   return newCard;
-// }
-
-// функция добавления карточки
-// function renderCard(item) {
-//   const card = createCard(item);
-//   cardListItem.prepend(card);
-// }
-
-//функция отрисовки массива карточек
-// function addInitialCards(item) {
-//   const arrayCards = item.map(createCard);
-//   cardListItem.append(...arrayCards);
-// }
-
-// addInitialCards(initialCards);
-
-//Функция удаления карточки
-// function deleteCard(evt) {
-//   const selectedCard = evt.currentTarget.closest(".card");
-//   selectedCard.remove();
-// }
-
-//-------------
 
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
@@ -85,15 +44,6 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener("keydown", closePopupEsc);
 }
-
-//функция открытия fullscreen фотографии
-// function openPopupFullscreen(evt) {
-//   openPopup(popupImage);
-
-//   popupImageFullscreen.src = evt.currentTarget.src;
-//   popupImageFullscreen.alt = evt.currentTarget.alt;
-//   popupImageCaption.textContent = evt.currentTarget.parentElement.querySelector(".card__header").textContent;
-// }
 
 //--------Функции закрытия попапов кликом на оверлей-------
 function closePopupClickOverlay(event) {
@@ -119,7 +69,7 @@ function submitFormCard(evt) {
   addCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
   addCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
 
-  addNewCard(addCard);
+  renderCard(addCard);
   closePopup(popupCard);
   evt.currentTarget.reset();
 }

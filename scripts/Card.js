@@ -30,7 +30,6 @@ class Card {
     // Вернём элемент наружу
     return this._element;
   }
-
   //слушатели событий на карточку
   _setEventListeners() {
     this._element.querySelector('.card__btn-like').addEventListener('click', () => {
@@ -68,7 +67,6 @@ initialCards.forEach((item) => {
   const card = new Card(item, '.card-template');
   // Создаём карточку и возвращаем наружу
   const cardElement = card.generateCard();
-
   // Добавляем в DOM
   document.querySelector('.cards__items').append(cardElement);
 });

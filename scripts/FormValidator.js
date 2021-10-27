@@ -1,11 +1,3 @@
-const enableValidationSettings = ({
-  formSelector: '.popup__container',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'popup__btn-save_disabled',
-  inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__text-error_visible'
-});
 
 class FormValidator {
   constructor(enableValidationSettings, formElement) {
@@ -27,12 +19,6 @@ class FormValidator {
       this._hideInputError(inputElement, errorElement);
     });
   }
-  //проверка inputs на валидность
-  // _hasInvalidInput() {
-  //   return this._inputList.some((inputElement) => {
-  //     return !inputElement.validity.valid;
-  //   })
-  // };
   //переключение кнопки отправки формы
   _toggleButtonState() {
     const isFormValid = this._formElement.checkValidity();
@@ -83,5 +69,14 @@ class FormValidator {
     this._setEventListeners();
   }
 }
+
+const enableValidationSettings = ({
+  formSelector: '.popup__container',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'popup__btn-save_disabled',
+  inputErrorClass: 'popup__text_type_error',
+  errorClass: 'popup__text-error_visible'
+});
 
 export { FormValidator, enableValidationSettings };
