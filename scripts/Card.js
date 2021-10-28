@@ -1,11 +1,9 @@
-import { openPopup } from './index.js';
-
-
 class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, openPopup) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._openPopup = openPopup;
   }
   // получaем готовую разметку карточки
   _getTemplate() {
@@ -58,7 +56,7 @@ class Card {
     popupImageFullscreen.src = this._link;
     popupImageFullscreen.alt = this._name;
     popupImage.querySelector(".popup__caption").textContent = this._name;
-    openPopup(popupImage);
+    this._openPopup(popupImage);
   }
 }
 

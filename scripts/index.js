@@ -27,22 +27,24 @@ const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
-
-function renderCard(item) {
-  const card = new Card(item, '.card-template');
+//создание новой карточки
+function addNewCard(item) {
+  const card = new Card(item, '.card-template', openPopup);
   const cardElement = card.generateCard();
-  document.querySelector('.cards__items').prepend(cardElement);
+  return cardElement;
+};
+
+//добавление карточки в начало страницы
+function renderCard(item) {
+  const cardElement = addNewCard(item);
+  cardListItem.prepend(cardElement);
 };
 
 //Загрузка массива карточек на страницу
 initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item, '.card-template');
-  // Создаём карточку и возвращаем наружу
-  const cardElement = card.generateCard();
-  // Добавляем в DOM
-  document.querySelector('.cards__items').append(cardElement);
+  cardListItem.append(addNewCard(item));
 });
+
 
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
