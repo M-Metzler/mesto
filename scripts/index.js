@@ -141,5 +141,4 @@ buttonPopupCloseCard.addEventListener("click", () => closePopup(popupCard));
 //Слушатель Фотографии
 buttonPopupCloseImage.addEventListener("click", () => closePopup(popupImage));
 
-export {openPopup};
 
