@@ -20,11 +20,13 @@ class Card {
     // Запишем разметку в приватное поле _element.
     // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
+    this._cardImageElement = this._element.querySelector('.card__image');
+    this._cardNameElement = this._element.querySelector('.card__header');
     this._setEventListeners();
     // Добавим данные
-    this._element.querySelector('.card__image').src = this._link;
-    this._element.querySelector('.card__image').alt = this._name;
-    this._element.querySelector('.card__header').textContent = this._name;
+    this._cardImageElement.src = this._link;
+    this._cardImageElement.alt = this._name;
+    this._cardNameElement.textContent = this._name;
     // Вернём элемент наружу
     return this._element;
   }
