@@ -1,5 +1,6 @@
 import { Card } from './Card.js';
-import { FormValidator, enableValidationSettings } from './FormValidator.js';
+import { initialCards } from './cards.js';
+import { FormValidator } from './FormValidator.js';
 
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
@@ -32,6 +33,16 @@ function renderCard(item) {
   const cardElement = card.generateCard();
   document.querySelector('.cards__items').prepend(cardElement);
 };
+
+//Загрузка массива карточек на страницу
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item, '.card-template');
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+  // Добавляем в DOM
+  document.querySelector('.cards__items').append(cardElement);
+});
 
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
@@ -85,6 +96,16 @@ function submitFormProfile(evt) {
 
 cardFormItem.addEventListener("submit", submitFormCard);
 formProfile.addEventListener("submit", submitFormProfile);
+
+//объект настроек с селекторами и классами формы
+const enableValidationSettings = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__text',
+  submitButtonSelector: '.popup__btn-save',
+  inactiveButtonClass: 'popup__btn-save_disabled',
+  inputErrorClass: 'popup__text_type_error',
+  errorClass: 'popup__text-error_visible'
+};
 
 //Экземпляры класса для каждой формы
 const profileFormValidator = new FormValidator(enableValidationSettings, formProfile);

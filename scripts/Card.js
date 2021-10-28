@@ -1,5 +1,5 @@
 import { openPopup } from './index.js';
-import { initialCards } from './cards.js';
+
 
 class Card {
   constructor(data, cardSelector) {
@@ -61,14 +61,5 @@ class Card {
     openPopup(popupImage);
   }
 }
-
-initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item, '.card-template');
-  // Создаём карточку и возвращаем наружу
-  const cardElement = card.generateCard();
-  // Добавляем в DOM
-  document.querySelector('.cards__items').append(cardElement);
-});
 
 export { Card };
