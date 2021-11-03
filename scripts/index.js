@@ -1,6 +1,7 @@
 import Card from './Card.js';
 import { initialCards } from './cards.js';
 import FormValidator from './FormValidator.js';
+import Section from './Section.js';
 
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
@@ -27,24 +28,21 @@ const cardListItem = document.querySelector(".cards__items");
 const cardFormItem = document.querySelector(".popup__container_type_card-form");
 const cardTemplateItem = document.querySelector(".card-template");
 
-//создание новой карточки
-function addNewCard(item) {
+//создание  карточки
+const createCard = (item) => {
   const card = new Card(item, '.card-template', openPopup);
   const cardElement = card.generateCard();
   return cardElement;
 };
 
-//добавление карточки в начало страницы
-function renderCard(item) {
-  const cardElement = addNewCard(item);
-  cardListItem.prepend(cardElement);
-};
+//отрисовка массива карточек
+const addInitialCards = new Section({
+  items: initialCards, renderer: (item) => {
+    addInitialCards.addItem(createCard(item));
+  }
+}, '.cards__items');
 
-//Загрузка массива карточек на страницу
-initialCards.forEach((item) => {
-  cardListItem.append(addNewCard(item));
-});
-
+addInitialCards.renderItems();
 
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
@@ -82,7 +80,7 @@ function submitFormCard(evt) {
   addCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
   addCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
 
-  renderCard(addCard);
+  addInitialCards.addItem(createCard(addCard));
   closePopup(popupCard);
   evt.currentTarget.reset();
 }
