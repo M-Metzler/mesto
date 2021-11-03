@@ -1,6 +1,6 @@
-import { Card } from './Card.js';
+import Card from './Card.js';
 import { initialCards } from './cards.js';
-import { FormValidator } from './FormValidator.js';
+import FormValidator from './FormValidator.js';
 
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
