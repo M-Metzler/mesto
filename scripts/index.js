@@ -2,7 +2,8 @@ import Card from './Card.js';
 import { initialCards } from './cards.js';
 import FormValidator from './FormValidator.js';
 import Section from './Section.js';
-import Popup from './Popup.js';
+import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
@@ -81,7 +82,7 @@ function submitFormCard(evt) {
   addCard.name = evt.currentTarget.querySelector(".popup__text_type_title").value;
   addCard.link = evt.currentTarget.querySelector(".popup__text_type_url").value;
 
-  addInitialCards.addItem(createCard(addCard));
+  cardListItem.prepend(createCard(addCard));
   closePopup(popupCard);
   evt.currentTarget.reset();
 }
@@ -139,5 +140,4 @@ buttonPopupCloseCard.addEventListener("click", () => closePopup(popupCard));
 
 //Слушатель Фотографии
 buttonPopupCloseImage.addEventListener("click", () => closePopup(popupImage));
-
 
