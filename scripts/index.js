@@ -4,13 +4,13 @@ import FormValidator from './FormValidator.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 
 // объявление переменных popup
 const popupProfile = document.querySelector(".popup_type_profile");
 const popupCard = document.querySelector(".popup_type_card");
 // переменные popup фотографии fullscreen
 const popupImage = document.querySelector(".popup_type_fullscreen");
-const popupImageFullscreen = popupImage.querySelector(".popup__image");
 const popupImageCaption = popupImage.querySelector(".popup__caption");
 // объявление переменных кнопок открытия/закрытия попапов
 const buttonPopupOpenProfile = document.querySelector(".profile__button-edit");
@@ -32,7 +32,11 @@ const cardTemplateItem = document.querySelector(".card-template");
 
 //создание  карточки
 const createCard = (item) => {
-  const card = new Card(item, '.card-template', openPopup);
+  const card = new Card({
+    data: item, handleCardClick: (name, link) => {
+      popupImageFullscreen.open(name, link);
+    }
+  }, '.card-template');
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -45,6 +49,9 @@ const addInitialCards = new Section({
 }, '.cards__items');
 
 addInitialCards.renderItems();
+
+//Открытие popup с фото
+const popupImageFullscreen = new PopupWithImage('.popup_type_fullscreen');
 
 // функция добавления попапам класса popup_opened
 function openPopup(popup) {
@@ -112,7 +119,7 @@ const enableValidationSettings = {
 //Экземпляры класса для каждой формы
 const profileFormValidator = new FormValidator(enableValidationSettings, formProfile);
 profileFormValidator.enableValidation();
-const cardFormValidator  = new FormValidator(enableValidationSettings, cardFormItem);
+const cardFormValidator = new FormValidator(enableValidationSettings, cardFormItem);
 cardFormValidator.enableValidation();
 
 //Слушатели оверлей

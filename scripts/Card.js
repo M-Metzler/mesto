@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(data, cardSelector, openPopup) {
+  constructor({ data, handleCardClick }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
-    this._openPopup = openPopup;
+    this._handleCardClick = handleCardClick;
   }
   // получaем готовую разметку карточки
   _getTemplate() {
@@ -39,7 +39,7 @@ export default class Card {
       this._deleteCard();
     });
     this._element.querySelector('.card__image').addEventListener('click', () => {
-      this._openImgFullscreen();
+      this._handleCardClick(this._name, this._link);
     });
   }
   //лайк карточки
@@ -49,16 +49,6 @@ export default class Card {
   //удаление карточки
   _deleteCard() {
     this._element.remove();
-  }
-  //открытие фото fullscreen
-  _openImgFullscreen() {
-    const popupImage = document.querySelector(".popup_type_fullscreen");
-    const popupImageFullscreen = popupImage.querySelector(".popup__image");
-
-    popupImageFullscreen.src = this._link;
-    popupImageFullscreen.alt = this._name;
-    popupImage.querySelector(".popup__caption").textContent = this._name;
-    this._openPopup(popupImage);
   }
 }
 
