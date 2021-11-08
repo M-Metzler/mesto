@@ -1,26 +1,24 @@
-import Card from './Card.js';
-import { initialCards } from './cards.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+// import './index.css';
 
-
-// объявление переменных кнопок открытия/закрытия попапов
-const buttonPopupOpenProfile = document.querySelector(".profile__button-edit");
-const buttonPopupOpenCard = document.querySelector(".profile__button-add");
-// объявление переменных формы профиля
-const formProfile = document.querySelector(".popup__container_type_profile-form");
-const nameInput = formProfile.querySelector(".popup__text_type_name");
-const jobInput = formProfile.querySelector(".popup__text_type_about-self");
-// объявление переменных карточки
-const cardListItem = document.querySelector(".cards__items");
-const cardFormItem = document.querySelector(".popup__container_type_card-form");
-//inputs карточки
-const cardName = document.querySelector(".popup__text_type_title");
-const cardLink = document.querySelector(".popup__text_type_url");
-
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import {
+  buttonPopupOpenProfile,
+  buttonPopupOpenCard,
+  formProfile,
+  nameInput,
+  jobInput,
+  cardListItem,
+  cardFormItem,
+  cardName,
+  cardLink,
+  enableValidationSettings,
+  initialCards
+} from '../utlis/constants.js';
 
 //создание  карточки
 const createCard = (item) => {
@@ -72,16 +70,6 @@ const popupAddCard = new PopupWithForm('.popup_type_card', {
 }
 )
 popupAddCard.setEventListeners();
-
-//объект настроек с селекторами и классами формы
-const enableValidationSettings = {
-  formSelector: '.popup__container',
-  inputSelector: '.popup__text',
-  submitButtonSelector: '.popup__btn-save',
-  inactiveButtonClass: 'popup__btn-save_disabled',
-  inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__text-error_visible'
-};
 
 //Экземпляры класса для каждой формы
 const profileFormValidator = new FormValidator(enableValidationSettings, formProfile);
