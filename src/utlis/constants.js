@@ -1,3 +1,10 @@
+import volgograd from '../images/volgograd.png';
+import krasnodar from '../images/krasnodar.png';
+import tumeni from '../images/tumeni.png';
+import habarovsk from '../images/habarovsk.png';
+import permi from '../images/permi.png';
+import piter from '../images/piter.png';
+
 export {
   buttonPopupOpenProfile,
   buttonPopupOpenCard,
@@ -11,6 +18,33 @@ export {
   enableValidationSettings,
   initialCards
 };
+
+const initialCards = [
+  {
+    name: "Волгоград",
+    link: volgograd,
+  },
+  {
+    name: "Краснодар",
+    link: krasnodar,
+  },
+  {
+    name: "Тюмень",
+    link: tumeni,
+  },
+  {
+    name: "Хабаровск",
+    link: habarovsk,
+  },
+  {
+    name: "Пермь",
+    link: permi,
+  },
+  {
+    name: "Санкт-Петербург",
+    link: piter,
+  },
+];
 
 // объявление переменных кнопок открытия/закрытия попапов
 const buttonPopupOpenProfile = document.querySelector(".profile__button-edit");
@@ -36,30 +70,4 @@ const enableValidationSettings = {
   errorClass: 'popup__text-error_visible'
 };
 
-const initialCards = [
-  {
-    name: "Волгоград",
-    link: "./images/volgograd.png",
-  },
-  {
-    name: "Краснодар",
-    link: "./images/krasnodar.png",
-  },
-  {
-    name: "Тюмень",
-    link: "./images/tumeni.png",
-  },
-  {
-    name: "Хабаровск",
-    link: "./images/habarovsk.png",
-  },
-  {
-    name: "Пермь",
-    link: "./images/permi.png",
-  },
-  {
-    name: "Санкт-Петербург",
-    link: "./images/piter.png",
-  },
-];
 
