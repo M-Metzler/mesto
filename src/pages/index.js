@@ -33,13 +33,14 @@ const createCard = (item) => {
 };
 
 //отрисовка массива карточек
-const addInitialCards = new Section({
-  items: initialCards, renderer: (item) => {
-    addInitialCards.addItem(createCard(item));
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
   }
 }, '.cards__items');
 
-addInitialCards.renderItems();
+cardList.renderItems();
 
 //Открытие popup с фото
 const popupImageFullscreen = new PopupWithImage('.popup_type_fullscreen');
@@ -64,7 +65,7 @@ const popupAddCard = new PopupWithForm('.popup_type_card', {
       name: cardName.value,
       link: cardLink.value
     }
-    cardListItem.prepend(createCard(item));
+    cardList.addItem(createCard(item));
     popupAddCard.close();
   }
 }
