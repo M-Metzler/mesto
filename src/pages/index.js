@@ -12,7 +12,6 @@ import {
   formProfile,
   nameInput,
   jobInput,
-  cardListItem,
   cardFormItem,
   cardName,
   cardLink,
