@@ -13,6 +13,7 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/_box/profile_box_position.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__avatar-edit/profile__avatar-edit.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__about-self/profile__about-self.css);
