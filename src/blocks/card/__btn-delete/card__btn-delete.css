@@ -10,6 +10,7 @@
   top: 20px;
   transition: opacity 1s ease-out;
   z-index: 15;
+  visibility: visible;
 }
 
 .card__btn-delete:hover {

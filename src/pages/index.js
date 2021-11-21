@@ -5,9 +5,11 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import {
+  userId,
   buttonPopupOpenProfile,
   buttonPopupOpenCard,
   buttonPopupOpenAvatar,
@@ -20,6 +22,7 @@ import {
   cardLink,
   enableValidationSettings
 } from '../utlis/constants.js';
+
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-30',
@@ -35,14 +38,24 @@ const popupImageFullscreen = new PopupWithImage('.popup_type_fullscreen');
 //Информация о пользователе
 const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__about-self', avatar: '.profile__avatar' });
 
-let userId = null;
+//Генерация карточке
+const cardList = new Section({
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
+  }
+}, '.cards__items');
 
 //создание  карточки
-const createCard = (item) => {
+const createCard = (data) => {
   const card = new Card({
-    data: item, handleCardClick: (name, link) => {
+    data: data,
+    userId: userId,
+    handleCardClick: (name, link) => {
       popupImageFullscreen.open(name, link);
       popupImageFullscreen.setEventListeners();
+    },
+    handleCardDelete: (cardId, card) => {
+      popupConfirmDelete.open(cardId, card);
     }
   }, '.card-template');
   const cardElement = card.generateCard();
@@ -52,28 +65,35 @@ const createCard = (item) => {
 //Получени карточек
 api.getInitialCards()
   .then((data) => {
-    const cardList = new Section({
-      items: data,
-      renderer: (item) => {
-        cardList.addItem(createCard(item));
-      }
-    }, '.cards__items');
-    cardList.renderItems();
+    cardList.renderItems(data);
   })
   .catch((err) => {
     console.log(err);
   })
 
+
 //Получение информации профиля
 api.getUserInfo()
   .then((data) => {
-    userId = data._id;
+    // userId = data._id;
     userInfo.setUserInfo(data);
   })
   .catch((err) => {
     console.log(err);
   })
 
+//Подтверждение удаления карточки
+const popupConfirmDelete = new PopupWithConfirmation('.popup_type_delete-card', {
+  confirmDelete: (cardId, card) => {
+    api.deleteCard(cardId)
+      .then((res) => {
+        card.deleteElement();
+        popupConfirmDelete.close();
+      })
+      .catch((err) => console.log(err))
+  }
+})
+popupConfirmDelete.setEventListeners();
 
 //Редактирование профиля пользователя
 const popupEditProfile = new PopupWithForm('.popup_type_profile', {
@@ -90,18 +110,20 @@ const popupEditProfile = new PopupWithForm('.popup_type_profile', {
 });
 popupEditProfile.setEventListeners();
 
+
 //Добавление карточки
 const popupAddCard = new PopupWithForm('.popup_type_card', {
-  submitFormHandler: () => {
-    const item = {
-      name: cardName.value,
-      link: cardLink.value
-    }
-    cardList.addItem(createCard(item));
-    popupAddCard.close();
+  submitFormHandler: (data) => {
+    api.addNewCard(data)
+      .then((data) => {
+        cardList.addItem(createCard(data));
+        popupAddCard.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
-}
-)
+});
 popupAddCard.setEventListeners();
 
 //Редактирование аватара

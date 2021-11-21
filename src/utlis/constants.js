@@ -1,5 +1,6 @@
 
 export {
+  userId,
   buttonPopupOpenProfile,
   buttonPopupOpenCard,
   buttonPopupOpenAvatar,
@@ -12,6 +13,8 @@ export {
   cardLink,
   enableValidationSettings
 };
+
+const userId = '160c074f79acea8bc3450574'; //мой id
 
 // объявление переменных кнопок открытия/закрытия попапов
 const buttonPopupOpenProfile = document.querySelector(".profile__button-edit");
@@ -38,5 +41,4 @@ const enableValidationSettings = {
   inputErrorClass: 'popup__text_type_error',
   errorClass: 'popup__text-error_visible'
 };
-
 
