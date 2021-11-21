@@ -56,8 +56,9 @@ const createCard = (data) => {
     },
     handleCardDelete: (cardId, card) => {
       popupConfirmDelete.open(cardId, card);
-    }
-  }, '.card-template');
+    },
+    handleLikeClick: () => card.handleLikeClick()
+  }, '.card-template', api);
   const cardElement = card.generateCard();
   return cardElement;
 };
@@ -75,7 +76,6 @@ api.getInitialCards()
 //Получение информации профиля
 api.getUserInfo()
   .then((data) => {
-    // userId = data._id;
     userInfo.setUserInfo(data);
   })
   .catch((err) => {
@@ -175,25 +175,3 @@ buttonPopupOpenAvatar.addEventListener("click", () => {
   avatarFormValidator.resetValidation();
 })
 
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-30/cards', {
-//   headers: {
-//     authorization: '7932a217-dd69-48a4-a32e-c1b357e558ff'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-//   fetch('https://nomoreparties.co/v1/cohort-30/users/me', {
-//   headers: {
-//       authorization: '7932a217-dd69-48a4-a32e-c1b357e558ff'
-//   }
-// })
-//   .then(res => res.json())
-//   .then((result) => {
-//     console.log(result);
-//   });
-
-  //me_id: "160c074f79acea8bc3450574"
