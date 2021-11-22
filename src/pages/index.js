@@ -18,8 +18,6 @@ import {
   formCard,
   nameInput,
   jobInput,
-  cardName,
-  cardLink,
   enableValidationSettings
 } from '../utlis/constants.js';
 
@@ -31,6 +29,17 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
+
+//Получение данных профиля и карточек
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then((res) => {
+    userInfo.setUserInfo(res[0]);
+    cardList.renderItems(res[1]);
+  })
+  .catch((err) => {
+    console.log(`Ошибка: ${err}`);
+  })
 
 //Открытие popup с фото
 const popupImageFullscreen = new PopupWithImage('.popup_type_fullscreen');
@@ -63,24 +72,6 @@ const createCard = (data) => {
   return cardElement;
 };
 
-//Получени карточек
-api.getInitialCards()
-  .then((data) => {
-    cardList.renderItems(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-
-
-//Получение информации профиля
-api.getUserInfo()
-  .then((data) => {
-    userInfo.setUserInfo(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
 
 //Подтверждение удаления карточки
 const popupConfirmDelete = new PopupWithConfirmation('.popup_type_delete-card', {
@@ -90,7 +81,8 @@ const popupConfirmDelete = new PopupWithConfirmation('.popup_type_delete-card', 
         card.deleteElement();
         popupConfirmDelete.close();
       })
-      .catch((err) => console.log(err))
+      .catch((err) =>
+        console.log(`Ошибка: ${err}`))
   }
 })
 popupConfirmDelete.setEventListeners();
@@ -98,13 +90,17 @@ popupConfirmDelete.setEventListeners();
 //Редактирование профиля пользователя
 const popupEditProfile = new PopupWithForm('.popup_type_profile', {
   submitFormHandler: (data) => {
+    popupEditProfile.showLoading(true);
     api.editUserInfo(data)
       .then((data) => {
         userInfo.setUserInfo(data);
         popupEditProfile.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        popupEditProfile.showLoading(false);
       })
   }
 });
@@ -114,13 +110,17 @@ popupEditProfile.setEventListeners();
 //Добавление карточки
 const popupAddCard = new PopupWithForm('.popup_type_card', {
   submitFormHandler: (data) => {
+    popupAddCard.showLoading(true);
     api.addNewCard(data)
       .then((data) => {
         cardList.addItem(createCard(data));
         popupAddCard.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        popupAddCard.showLoading(false);
       })
   }
 });
@@ -129,13 +129,17 @@ popupAddCard.setEventListeners();
 //Редактирование аватара
 const popupEditAvatar = new PopupWithForm('.popup_type_avatar', {
   submitFormHandler: (data) => {
+    popupEditAvatar.showLoading(true);
     api.editUserAvatar(data)
       .then((data) => {
         userInfo.setUserInfo(data);
-        popupEditProfile.close();
+        popupEditAvatar.close();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Ошибка: ${err}`);
+      })
+      .finally(() => {
+        popupEditAvatar.showLoading(false);
       })
   }
 })

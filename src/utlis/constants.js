@@ -9,8 +9,6 @@ export {
   formCard,
   nameInput,
   jobInput,
-  cardName,
-  cardLink,
   enableValidationSettings
 };
 
@@ -28,9 +26,6 @@ const jobInput = formProfile.querySelector(".popup__text_type_about-self");
 const formCard = document.querySelector(".popup__container_type_card-form");
 //объявление переменных аватара
 const formAvatar = document.querySelector(".popup__container_type_avatar-form");
-//inputs карточки
-const cardName = document.querySelector(".popup__text_type_title");
-const cardLink = document.querySelector(".popup__text_type_url");
 
 //объект настроек с селекторами и классами формы
 const enableValidationSettings = {

@@ -67,7 +67,7 @@ export default class Card {
           this._likesCounter.textContent = data.likes.length;
         })
         .catch((err) => {
-          console.log(err);
+          console.log(`Ошибка: ${err}`);
         })
     } else {
       this._api.addLike(this._cardId)
@@ -76,7 +76,7 @@ export default class Card {
           this._likesCounter.textContent = data.likes.length;
         })
         .catch((err) => {
-          console.log(err);
+          console.log(`Ошибка: ${err}`);
         })
     }
   }
