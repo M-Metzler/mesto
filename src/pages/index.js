@@ -9,7 +9,6 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation.js';
 import UserInfo from '../components/UserInfo.js';
 import Api from '../components/Api.js';
 import {
-  userId,
   buttonPopupOpenProfile,
   buttonPopupOpenCard,
   buttonPopupOpenAvatar,
@@ -21,6 +20,7 @@ import {
   enableValidationSettings
 } from '../utlis/constants.js';
 
+let userId;
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-30',
@@ -33,16 +33,18 @@ const api = new Api({
 
 //Получение данных профиля и карточек
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then((res) => {
-    userInfo.setUserInfo(res[0]);
-    cardList.renderItems(res[1]);
-  })
+.then(([userData, initialCards]) => {
+  userInfo.setUserInfo(userData);
+  userId = userData._id;
+  cardList.renderItems(initialCards);
+})
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
   })
 
 //Открытие popup с фото
 const popupImageFullscreen = new PopupWithImage('.popup_type_fullscreen');
+popupImageFullscreen.setEventListeners();
 
 //Информация о пользователе
 const userInfo = new UserInfo({ name: '.profile__name', job: '.profile__about-self', avatar: '.profile__avatar' });
@@ -61,12 +63,10 @@ const createCard = (data) => {
     userId: userId,
     handleCardClick: (name, link) => {
       popupImageFullscreen.open(name, link);
-      popupImageFullscreen.setEventListeners();
     },
     handleCardDelete: (cardId, card) => {
       popupConfirmDelete.open(cardId, card);
     },
-    handleLikeClick: () => card.handleLikeClick()
   }, '.card-template', api);
   const cardElement = card.generateCard();
   return cardElement;
