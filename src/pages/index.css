@@ -4,11 +4,9 @@
 @import url(../blocks/root/root.css);
 @import url(../blocks/page/page.css);
 
-
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/_box/header_box_position.css);
 @import url(../blocks/header/__logo/header__logo.css);
-
 
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/_box/profile_box_position.css);
@@ -47,7 +45,6 @@
 @import url(../blocks/popup/__btn-save/_disabled/popup__btn-save_disabled.css);
 @import url(../blocks/popup/__btn-close/popup__btn-close.css);
 
-
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/cards/_box/cards_box_position.css);
 @import url(../blocks/cards/__items/cards__items.css);
@@ -65,5 +62,3 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/_box/footer_box_position.css);
 @import url(../blocks/footer/__author/footer__author.css);
-
-

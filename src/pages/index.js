@@ -33,11 +33,11 @@ const api = new Api({
 
 //Получение данных профиля и карточек
 Promise.all([api.getUserInfo(), api.getInitialCards()])
-.then(([userData, initialCards]) => {
-  userInfo.setUserInfo(userData);
-  userId = userData._id;
-  cardList.renderItems(initialCards);
-})
+  .then(([userData, initialCards]) => {
+    userInfo.setUserInfo(userData);
+    userId = userData._id;
+    cardList.renderItems(initialCards);
+  })
   .catch((err) => {
     console.log(`Ошибка: ${err}`);
   })
