@@ -19,6 +19,14 @@
 8. Сборка проекта с помощью Webpack
 9. Работа с API, метод 'fetch', Promise
 
+### Запуск проекта
+1. Клонировать репозиторий ``` git clone https://github.com/M-Metzler/mesto.git ```
+2. Установить зависимости ``` npm install ```
+3. Запуск в режиме разработки ``` npm run dev ```  
+Для просмотра результатов в браузере откройте http://localhost:8080
+5. Сборка проекта ``` npm run build ```
+
+
 ### Страница проекта
 
 [Ссылка на проект](https://m-metzler.github.io/mesto/index.html)
